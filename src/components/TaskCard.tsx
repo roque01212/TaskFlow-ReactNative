@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 
-import type { Task } from "../interfaces/Task";
+import type { Task } from "../interfaces/task";
 import { colors, spacing } from "../constants/theme";
 
 type TaskCardProps = {
@@ -11,9 +11,15 @@ export const TaskCard = ({ task }: TaskCardProps) => {
   return (
     <View style={styles.card}>
       <View style={styles.content}>
-        <Text style={[styles.title, task.complete && styles.completedText]}>
-          {task.title}
-        </Text>
+        <View style={styles.header}>
+          <Text style={[styles.title, task.complete && styles.completedText]}>
+            {task.title}
+          </Text>
+
+          <View style={styles.categoryBadge}>
+            <Text style={styles.categoryText}>{task.category}</Text>
+          </View>
+        </View>
 
         <Text
           style={[styles.description, task.complete && styles.completedText]}
@@ -61,6 +67,11 @@ const styles = StyleSheet.create({
     marginRight: spacing.sm,
   },
 
+  header: {
+    gap: spacing.xs,
+    marginBottom: spacing.xs,
+  },
+
   title: {
     color: colors.text,
     fontSize: 17,
@@ -72,6 +83,20 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 20,
     marginTop: spacing.xs,
+  },
+
+  categoryBadge: {
+    alignSelf: "flex-start",
+    backgroundColor: "#E0E7FF",
+    borderRadius: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+  },
+
+  categoryText: {
+    color: colors.primary,
+    fontSize: 12,
+    fontWeight: "700",
   },
 
   completedText: {
